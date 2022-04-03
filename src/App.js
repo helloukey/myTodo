@@ -110,20 +110,16 @@ function App() {
           <Navbar />
           <Routes>
             <Route
-              path="/"
-              element={user ? <Home /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/login"
-              element={!user ? <Login /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/signup"
-              element={!user ? <Signup /> : <Navigate to="/" />}
-            />
-            <Route
               path="/myTodo"
-              element={user ? <Home /> : <Navigate to="/login" />}
+              element={user ? <Home /> : <Navigate to="/myTodo/login" />}
+            />
+            <Route
+              path="/myTodo/login"
+              element={!user ? <Login /> : <Navigate to="/myTodo" />}
+            />
+            <Route
+              path="/myTodo/signup"
+              element={!user ? <Signup /> : <Navigate to="/myTodo" />}
             />
           </Routes>
         </BrowserRouter>

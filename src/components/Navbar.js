@@ -46,14 +46,14 @@ export default function Navbar() {
         {/* login button animation on hover */}
         {!user && (
           <motion.li variants={linkVariant} whileHover="hover">
-            <Link to="/login">Login</Link>
+            <Link to="/myTodo/login">Login</Link>
           </motion.li>
         )}
 
         {/* signup button animation on hover */}
         {!user && (
           <motion.li variants={linkVariant} whileHover="hover">
-            <Link to="/signup">Signup</Link>
+            <Link to="/myTodo/signup">Signup</Link>
           </motion.li>
         )}
 
