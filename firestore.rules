@@ -1,0 +1,12 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /todos/{document=**} {
+      // only auth users can create todo's
+      allow create: if request.auth != null;
+
+      // only show matched uid data to read & delete
+      allow read, delete: if request.auth.uid == resource.data.uid;
+    }
+  }
+}
