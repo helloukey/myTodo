@@ -111,7 +111,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={user ? <Home /> : <Login />}
+              element={user ? <Home /> : <Navigate to="/login" />}
             />
             <Route
               path="/login"
@@ -120,6 +120,10 @@ function App() {
             <Route
               path="/signup"
               element={!user ? <Signup /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/myTodo"
+              element={user ? <Home /> : <Navigate to="/login" />}
             />
           </Routes>
         </BrowserRouter>
