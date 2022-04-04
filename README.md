@@ -57,7 +57,7 @@ This nickname is an internal, convenience identifier and is only visible to you 
 
 3. Click **Register app**.
 
-4. Copy the **firebaseConfig** object from **Add Firebase SDK** on-screen instructions.
+4. Copy the **firebaseConfig** object from **Add Firebase SDK** on-screen instructions. <br/>
 Example:
 ```
 const firebaseConfig = {
@@ -77,7 +77,7 @@ Or, follow this official documentations:
 ### Firebase Project ID
 
 1. Goto [Project settings](https://console.firebase.google.com/project/_/settings/general/) and copy the **Project ID** from the top section.
-2. Replace the **Project ID** with the one given inside `/.firebaserc` file
+2. Replace the **Project ID** with the one given inside `/.firebaserc` file <br/>
 Example:
 ```
 {
