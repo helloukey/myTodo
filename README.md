@@ -77,7 +77,7 @@ Or, follow this official documentations:
 ### Firebase Project ID
 
 1. Goto [Project settings](https://console.firebase.google.com/project/_/settings/general/) and copy the **Project ID** from the top section.
-2. Replace the **Project ID** with the one given inside `/.firebaserc` file <br/>
+2. Replace the **Project ID** with the one given inside `/.firebaserc` file. <br/>
 Example:
 ```
 {
