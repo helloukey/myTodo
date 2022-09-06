@@ -5,8 +5,8 @@ service cloud.firestore {
       // only auth users can create todo's
       allow create: if request.auth != null;
 
-      // only show matched uid data to read & delete
-      allow read, delete: if request.auth.uid == resource.data.uid;
+      // only show matched uid data to read, update & delete
+      allow read, update, delete: if request.auth.uid == resource.data.uid;
     }
   }
 }
