@@ -1,6 +1,7 @@
 // firebase imports
 import { db } from "../firebase/config";
 import { deleteDoc, doc } from "firebase/firestore";
+import useUpdate from "../hooks/useUpdate";
 
 // styles
 import "./List.css";
@@ -39,6 +40,8 @@ const containerVariant = {
 };
 
 export default function List({ todos }) {
+  const { updateDocument, updatePending, updateError } = useUpdate();
+
   // handle delete
   const handleDelete = async (id) => {
     const ref = doc(db, "todos", id);
@@ -46,8 +49,13 @@ export default function List({ todos }) {
   };
 
   // handle complete
-  const handleComplete = (e) => {
-    e.target.classList.toggle("strike");
+  const handleComplete = (e, isComplete) => {
+    if (e.target.localName === "span") {
+      updateDocument(e.target.parentElement.id, !isComplete);
+    }
+    if (e.target.localName === "li") {
+      updateDocument(e.target.id, !isComplete);
+    }
   };
 
   return (
@@ -62,12 +70,19 @@ export default function List({ todos }) {
           todos.map((todo) => (
             // list animaton
             <motion.li
+              id={todo.id}
               key={todo.id}
-              onClick={handleComplete}
+              onClick={(e) => handleComplete(e, todo.isComplete)}
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               exit={{ x: "-100%", opacity: 0, duration: 0.5 }}
+              style={
+                updatePending
+                  ? { pointerEvents: "none" }
+                  : { pointerEvents: "" }
+              }
+              className={todo.isComplete ? "strike" : ""}
             >
               {/* span animation */}
               <motion.span
@@ -96,6 +111,8 @@ export default function List({ todos }) {
             </motion.li>
           ))}
       </AnimatePresence>
+      {/* Update Error Message */}
+      {updateError && <div>{updateError}</div>}
     </motion.div>
   );
 }

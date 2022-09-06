@@ -55,6 +55,7 @@ export default function Home() {
       title: todo,
       uid: user.uid,
       createdAt: timestamp,
+      isComplete: false
     });
 
     // reset input field
