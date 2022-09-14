@@ -1,10 +1,12 @@
 // imports
 import { useState } from "react";
 import useLogin from "../../hooks/useLogin";
+import showIcon from "../../assets/eye.svg";
+import hideIcon from "../../assets/eye-off.svg";
 
 // styles
 import "./Login.css";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 // motion variants
 const buttonVariant = {
@@ -47,6 +49,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, error, loading } = useLogin();
+  const [showCredential, setShowCredential] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -95,7 +98,7 @@ export default function Login() {
             </motion.div>
           )}
         </label>
-        
+
         {/* button when loading is false */}
         {!loading && (
           <motion.button variants={buttonVariant} whileHover="animate">
@@ -108,6 +111,34 @@ export default function Login() {
           <motion.button variants={buttonVariant} animate="animate" disabled>
             Loading
           </motion.button>
+        )}
+
+        {/* Demo Credentials */}
+        <div className="demo-container">
+          <p className="demo-name">Demo Credentials:</p>
+          <img
+            className={showCredential ? `show-icon` : `show-icon hidden`}
+            src={showIcon}
+            alt=""
+            onClick={() => setShowCredential(false)}
+          />
+          <img
+            className={!showCredential ? `hide-icon` : `hide-icon hidden`}
+            src={hideIcon}
+            alt=""
+            onClick={() => setShowCredential(true)}
+          />
+        </div>
+
+        {showCredential && (
+          <motion.div
+            className="credentials-container"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <p className="email-credential">Email: kunal@google.com</p>
+            <p className="password-credential">Password: test@123</p>
+          </motion.div>
         )}
       </form>
     </motion.div>

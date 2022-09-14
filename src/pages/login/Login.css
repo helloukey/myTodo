@@ -41,7 +41,59 @@
     outline: none;
 }
 
+/* Demo credentials */
+.demo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0 0 0;
+    padding: 0;
+}
+
+.demo-name {
+    margin: 0;
+    padding: 0;
+}
+
+.show-icon, .hide-icon {
+    width: 20px;
+    height: auto;
+    margin: 1.5px 0 0 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.credentials-container {
+    margin: 10px 0 0 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+.email-credential, .password-credential {
+    margin: 0;
+    padding: 0;
+}
+
+.hidden {
+    display: none;
+}
+
 /* media queries */
+@media (max-width: 1550px) {
+    .login-container {
+        width: 40%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .login-container {
+        width: 50%;
+    }
+}
+
 @media (max-width: 950px) {
     .login-container {
         width: 60%;
@@ -60,7 +112,7 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
     .login-container form {
         width: 80%;
     }

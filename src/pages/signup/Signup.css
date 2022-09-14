@@ -42,6 +42,18 @@
 }
 
 /* media queries */
+@media (max-width: 1550px) {
+    .signup-container {
+        width: 40%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .signup-container {
+        width: 50%;
+    }
+}
+
 @media (max-width: 950px) {
     .signup-container {
         width: 60%;
@@ -60,7 +72,7 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
     .signup-container form {
         width: 80%;
     }
