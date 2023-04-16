@@ -9,7 +9,7 @@ describe("check login screen", () => {
         <Login />
       </AuthContextProvider>
     );
-    const loginHeader = await screen.findByRole("heading");
+    const loginHeader = await screen.findByRole("heading", {text: "Login"});
     expect(loginHeader).toBeInTheDocument();
   });
 });
