@@ -6,7 +6,7 @@ import hideIcon from "../../assets/eye-off.svg";
 
 // styles
 import "./Login.css";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 // motion variants
 const buttonVariant = {
