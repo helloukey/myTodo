@@ -75,6 +75,7 @@ export default function Login() {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             required
+            data-testid="email"
           />
         </label>
 
@@ -85,6 +86,7 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
+            data-testid="password"
           />
 
           {/* error animation */}
