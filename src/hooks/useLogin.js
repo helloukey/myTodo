@@ -21,10 +21,8 @@ export default function useLogin() {
       .then((res) => {
         dispatch({ type: "LOGIN", payload: res.user });
         setLoading(false);
-        console.log(res.user);
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
         setError(error.message);
       });
