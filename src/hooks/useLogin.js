@@ -20,10 +20,12 @@ export default function useLogin() {
     await signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
         dispatch({ type: "LOGIN", payload: res.user });
+        setLoading(false);
         console.log(res.user);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
         setError(error.message);
       });
 
