@@ -73,6 +73,7 @@ export default function Signup() {
             onChange={(e) => setDisplayName(e.target.value)}
             value={displayName}
             required
+            data-testid="name"
           />
         </label>
         <label>
@@ -82,6 +83,7 @@ export default function Signup() {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             required
+            data-testid="email"
           />
         </label>
         <label>
@@ -91,19 +93,16 @@ export default function Signup() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
+            data-testid="password"
           />
-
-          {/* error animation */}
-          {error && (
-            <motion.div
-              variants={errorVariant}
-              animate="shake"
-              className="error"
-            >
-              {error}
-            </motion.div>
-          )}
         </label>
+
+        {/* error message */}
+        <div
+            className={`error ${error ? "" : "hidden"}`}
+            data-testid="error">
+            {error}
+          </div>
 
         {/* button when loading is false */}
         {!loading && (
@@ -115,7 +114,7 @@ export default function Signup() {
         {/* button when loading is true */}
         {loading && (
           <motion.button variants={buttonVariant} animate="animate" disabled>
-            Loading
+            Signing up...
           </motion.button>
         )}
       </form>
