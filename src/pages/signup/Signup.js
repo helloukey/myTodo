@@ -32,17 +32,6 @@ const containerVariant = {
   },
 };
 
-const errorVariant = {
-  shake: {
-    rotate: [0, 2, -2, 0],
-    transition: {
-      repeat: 5,
-      repeatType: "loop",
-      duration: 0.3,
-    },
-  },
-};
-
 export default function Signup() {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
