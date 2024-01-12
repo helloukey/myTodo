@@ -1,42 +1,41 @@
-// imports
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useAuthContext } from "./useAuthContext";
-
-// firebase imports
 import { auth } from "../firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-export default function useLogin() {
+const useLogin = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const { dispatch } = useAuthContext();
-  const [cancelled, setCancelled] = useState(false);
+  const isMounted = useRef(false);
 
-  const login = async (email, password) => {
+  const login = useCallback((email, password) => {
     setError(null);
     setLoading(true);
 
-    // signin user with email & password
-    await signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
-        dispatch({ type: "LOGIN", payload: res.user });
-        console.log(res.user);
+        if (isMounted.current) {
+          dispatch({ type: "LOGIN", payload: res.user });
+          setLoading(false);
+        }
       })
       .catch((error) => {
-        console.log(error);
-        setError(error.message);
+        if (isMounted.current) {
+          setLoading(false);
+          setError(error.message);
+        }
       });
+  },[dispatch]);
 
-    // stop loading when cancelled state is false
-    if (!cancelled) {
-      setLoading(false);
-    }
-  };
-
-  // cleanup function
   useEffect(() => {
-    return () => setCancelled(true);
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
   return { error, loading, login };
-}
+};
+
+export default useLogin;

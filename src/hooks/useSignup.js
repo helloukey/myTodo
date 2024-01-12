@@ -1,5 +1,5 @@
 // imports
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useAuthContext } from "./useAuthContext";
 
 // firebase imports
@@ -10,35 +10,39 @@ export default function useSignup() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const { dispatch } = useAuthContext();
-  const [cancelled, setCancelled] = useState(false);
+  const isMounted = useRef(false);
 
-  const signup = async (email, password, displayName) => {
-    setError(null);
-    setLoading(true);
+  const signup = useCallback(
+    (email, password, displayName) => {
+      setError(null);
+      setLoading(true);
 
-    // create new user with email & password
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        updateProfile(res.user, {
-          displayName,
-        }).then(() => {
-          dispatch({ type: "LOGIN", payload: res.user });
+      // create new user with email & password
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((res) => {
+          updateProfile(res.user, {
+            displayName,
+          }).then(() => {
+            if (isMounted.current) {
+              setLoading(false);
+              dispatch({ type: "LOGIN", payload: res.user });
+            }
+          });
+        })
+        .catch((error) => {
+          if (isMounted.current) {
+            setLoading(false);
+            setError(error.message);
+          }
         });
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(error.message);
-      });
-
-    // stop loading when cancelled state is false
-    if (!cancelled) {
-      setLoading(false);
-    }
-  };
+    },
+    [dispatch]
+  );
 
   // cleanup function
   useEffect(() => {
-    return () => setCancelled(true);
+    isMounted.current = true;
+    return () => (isMounted.current = false);
   }, []);
 
   return { error, loading, signup };

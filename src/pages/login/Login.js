@@ -6,7 +6,7 @@ import hideIcon from "../../assets/eye-off.svg";
 
 // styles
 import "./Login.css";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 // motion variants
 const buttonVariant = {
@@ -34,18 +34,7 @@ const containerVariant = {
   },
 };
 
-const errorVariant = {
-  shake: {
-    rotate: [0, 2, -2, 0],
-    transition: {
-      repeat: 5,
-      repeatType: "loop",
-      duration: 0.3,
-    },
-  },
-};
-
-export default function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, error, loading } = useLogin();
@@ -75,6 +64,7 @@ export default function Login() {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             required
+            data-testid="email"
           />
         </label>
 
@@ -85,31 +75,38 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
+            data-testid="password"
           />
-
-          {/* error animation */}
-          {error && (
-            <motion.div
-              variants={errorVariant}
-              animate="shake"
-              className="error"
-            >
-              {error}
-            </motion.div>
-          )}
         </label>
 
-        {/* button when loading is false */}
+        {/* error message */}
+          <div
+            className={`error ${error ? "" : "hidden"}`}
+            data-testid="error"
+          >
+            {error}
+          </div>
+
+        {/* Login button */}
         {!loading && (
-          <motion.button variants={buttonVariant} whileHover="animate">
+          <motion.button
+            type="submit"
+            variants={buttonVariant}
+            whileHover="animate"
+          >
             Login
           </motion.button>
         )}
 
-        {/* button when loading is true */}
+        {/* Logging button */}
         {loading && (
-          <motion.button variants={buttonVariant} animate="animate" disabled>
-            Loading
+          <motion.button
+            type="submit"
+            disabled={true}
+            variants={buttonVariant}
+            animate="animate"
+          >
+            Logging...
           </motion.button>
         )}
 
@@ -143,4 +140,6 @@ export default function Login() {
       </form>
     </motion.div>
   );
-}
+};
+
+export default Login;
