@@ -21,7 +21,7 @@ function App() {
     // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
   };
 
-  const particlesLoaded = (container) => {};
+  const particlesLoaded = (container) => { };
 
   return (
     <div className="App">
@@ -109,6 +109,10 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
+            <Route
+              path="/"
+              element={user ? <Navigate to="/myTodo" /> : <Navigate to="/myTodo/login" />}
+            />
             <Route
               path="/myTodo"
               element={user ? <Home /> : <Navigate to="/myTodo/login" />}
