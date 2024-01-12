@@ -29,11 +29,15 @@ export default function Navbar() {
       <ul className="logo-container">
         {/* logo animation */}
         <motion.li animate={{ rotate: 360 }} transition={{ duration: 2 }}>
-          <img src={Logo} alt="logo" className="logo" />
+          <Link to="/">
+            <img src={Logo} alt="logo" className="logo" />
+          </Link>
         </motion.li>
 
         <li>
-          <h1>myTodo</h1>
+          <Link to="/" style={{textDecoration: "none"}}>
+            <h1>myTodo</h1>
+          </Link>
         </li>
       </ul>
       <ul className="links-container">
