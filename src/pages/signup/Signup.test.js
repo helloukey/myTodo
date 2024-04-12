@@ -7,7 +7,7 @@ const MockedSignup = () => {
     <AuthContextProvider>
       <Signup />
     </AuthContextProvider>
-  )
+  );
 };
 
 const performInputAction = async (name, email, password) => {
@@ -19,20 +19,26 @@ const performInputAction = async (name, email, password) => {
   fireEvent.change(passwordInput, { target: { value: password } });
   const singupButton = screen.getByRole("button", { text: /Signup/i });
   fireEvent.click(singupButton);
-  const loadingButton = await screen.findByRole("button", { text: /Signing up.../i });
+  const loadingButton = await screen.findByRole("button", {
+    text: /Signing up.../i,
+  });
   expect(loadingButton).toBeInTheDocument();
 };
 
 describe("check signup screen", () => {
-    it("check signup header", async () => {
+  it("check signup header", async () => {
     render(<MockedSignup />);
-    const signupHeader = await screen.findByRole("heading", {text: "Signup"});
+    const signupHeader = await screen.findByRole("heading", { text: "Signup" });
     expect(signupHeader).toBeInTheDocument();
   });
 
   it("perform successful signup", async () => {
     render(<MockedSignup />);
-    await performInputAction("kunaltesting", "kunaltesting@google.com", "test@123");
+    await performInputAction(
+      "kunaltesting",
+      "kunaltesting@google.com",
+      "test@123"
+    );
     const addButton = await screen.findByRole("button", { text: /Add/i });
     expect(addButton).toBeInTheDocument();
   });
@@ -40,7 +46,7 @@ describe("check signup screen", () => {
   it("perform unsuccessful signup", async () => {
     render(<MockedSignup />);
     await performInputAction("kunal", "kunal@google.com", "test@1234");
-    const singupButton = await screen.findByRole("button", {text: /Signup/i});
+    const singupButton = await screen.findByRole("button", { text: /Signup/i });
     expect(singupButton).toBeInTheDocument();
     const errorMessage = await screen.findByTestId("error");
     expect(errorMessage).toBeVisible();

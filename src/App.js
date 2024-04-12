@@ -17,11 +17,13 @@ import Signup from "./pages/signup/Signup";
 function App() {
   const { authIsReady, user } = useAuthContext();
 
+  // eslint-disable-next-line no-unused-vars
   const particlesInit = (main) => {
     // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
   };
 
-  const particlesLoaded = (container) => { };
+  // eslint-disable-next-line no-unused-vars
+  const particlesLoaded = (container) => {};
 
   return (
     <div className="App">
@@ -111,7 +113,13 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={user ? <Navigate to="/myTodo" /> : <Navigate to="/myTodo/login" />}
+              element={
+                user ? (
+                  <Navigate to="/myTodo" />
+                ) : (
+                  <Navigate to="/myTodo/login" />
+                )
+              }
             />
             <Route
               path="/myTodo"

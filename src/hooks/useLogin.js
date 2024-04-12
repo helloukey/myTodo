@@ -9,24 +9,27 @@ const useLogin = () => {
   const { dispatch } = useAuthContext();
   const isMounted = useRef(false);
 
-  const login = useCallback((email, password) => {
-    setError(null);
-    setLoading(true);
+  const login = useCallback(
+    (email, password) => {
+      setError(null);
+      setLoading(true);
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        if (isMounted.current) {
-          dispatch({ type: "LOGIN", payload: res.user });
-          setLoading(false);
-        }
-      })
-      .catch((error) => {
-        if (isMounted.current) {
-          setLoading(false);
-          setError(error.message);
-        }
-      });
-  },[dispatch]);
+      signInWithEmailAndPassword(auth, email, password)
+        .then((res) => {
+          if (isMounted.current) {
+            dispatch({ type: "LOGIN", payload: res.user });
+            setLoading(false);
+          }
+        })
+        .catch((error) => {
+          if (isMounted.current) {
+            setLoading(false);
+            setError(error.message);
+          }
+        });
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     isMounted.current = true;

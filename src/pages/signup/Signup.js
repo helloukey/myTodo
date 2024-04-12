@@ -87,11 +87,9 @@ export default function Signup() {
         </label>
 
         {/* error message */}
-        <div
-            className={`error ${error ? "" : "hidden"}`}
-            data-testid="error">
-            {error}
-          </div>
+        <div className={`error ${error ? "" : "hidden"}`} data-testid="error">
+          {error}
+        </div>
 
         {/* button when loading is false */}
         {!loading && (

@@ -35,7 +35,7 @@ export default function Navbar() {
         </motion.li>
 
         <li>
-          <Link to="/" style={{textDecoration: "none"}}>
+          <Link to="/" style={{ textDecoration: "none" }}>
             <h1>myTodo</h1>
           </Link>
         </li>

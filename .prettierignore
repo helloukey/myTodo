@@ -1,0 +1,9 @@
+node_modules
+build
+public
+.firebaserc
+.gitignore
+firebase.json
+firebase.indexes.json
+firebase.rules
+LICENSE

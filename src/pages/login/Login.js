@@ -80,12 +80,9 @@ const Login = () => {
         </label>
 
         {/* error message */}
-          <div
-            className={`error ${error ? "" : "hidden"}`}
-            data-testid="error"
-          >
-            {error}
-          </div>
+        <div className={`error ${error ? "" : "hidden"}`} data-testid="error">
+          {error}
+        </div>
 
         {/* Login button */}
         {!loading && (

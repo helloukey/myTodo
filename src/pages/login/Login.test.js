@@ -17,7 +17,9 @@ const performInputAction = async (email, password) => {
   fireEvent.change(passwordInput, { target: { value: password } });
   const loginButton = screen.getByRole("button", { text: /Login/i });
   fireEvent.click(loginButton);
-  const loadingButton = await screen.findByRole("button", { text: /Logging.../i });
+  const loadingButton = await screen.findByRole("button", {
+    text: /Logging.../i,
+  });
   expect(loadingButton).toBeInTheDocument();
 };
 
@@ -38,7 +40,7 @@ describe("check login page", () => {
   it("perform unsuccessful login", async () => {
     render(<MockedLogin />);
     await performInputAction("kunal@google.com", "test@1234");
-    const loginButton = await screen.findByRole("button", {text: /Login/i});
+    const loginButton = await screen.findByRole("button", { text: /Login/i });
     expect(loginButton).toBeInTheDocument();
     const errorMessage = await screen.findByTestId("error");
     expect(errorMessage).toBeVisible();
